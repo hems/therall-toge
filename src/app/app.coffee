@@ -1,4 +1,4 @@
-$ = require 'jquery'
+# $ = require 'jquery'
 
 happens = require 'happens'
 
@@ -11,11 +11,11 @@ class App
 		$ =>
 
 			threed = require './threed'
-			threed = new threed()
+			@threed = new threed()
 
 			new p5 @sketch
 
-	sketch: (s) ->
+	sketch: (s) =>
 
 		sound = null
 		fft   = null
@@ -40,9 +40,7 @@ class App
 			fft = new p5.FFT 0.80, 16 * 64
 			fft_cheap = new p5.FFT 0.80, 16
 
-		s.draw = ->
-
-			app.emit 'frame'
+		s.draw = =>
 
 			s.background 0
 			spectrum = fft_cheap.analyze()
@@ -53,14 +51,26 @@ class App
 			i = 0
 
 
+			row = @threed.geometry.vertices
 			while i < spectrum.length
-			  x = s.map( i, 0, spectrum.length, 0, s.width )
+				x = s.map( i, 0, spectrum.length, 0, s.width )
 
-			  h = -s.height + s.map(spectrum[i], 0, 255, s.height, 0) * 1
+				h = -s.height + s.map(spectrum[i], 0, 255, s.height, 0) * 1
 
-			  s.rect x, s.height, s.width / spectrum.length, h
+				s.rect x, s.height, s.width / spectrum.length, h
 
-			  i++
+				# @threed.geometry.vertices[i].z = spectrum[i]
+
+				# console.log "#{i} : #{s.height}"
+
+				@threed.geometry.vertices[i].z = h
+
+				i++
+
+			@threed.geometry.verticesNeedUpdate = true;
+			@threed.geometry.normalsNeedUpdate = true;
+
+			app.emit 'frame'
 
 			waveform = fft.waveform()
 
