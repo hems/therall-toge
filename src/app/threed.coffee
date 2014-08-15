@@ -18,9 +18,15 @@ module.exports = class threed
 		# camera
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
 
-		camera.position.x = 1 * 160
-		camera.position.y = 0.75 * 160
-		camera.position.z = 1 * 160
+		window.camera = camera
+		camera.position.x = 0
+		camera.position.y = 75
+		camera.position.z = 200
+
+		# camera.position.x = 200
+		# camera.position.y = 200
+		# camera.position.z = 200
+
 		camera.lookAt new THREE.Vector3
 
 		# camera.position.y = -450
@@ -41,14 +47,23 @@ module.exports = class threed
 
 		# plane
 
-		@geometry = new THREE.PlaneGeometry( 300, 300, 15, 15 )
+		@geometry = new THREE.PlaneGeometry( 150, 150, 15, 150 )
 		mesh     = new THREE.MeshBasicMaterial
 
 		mesh.wireframe = true
 
 		plane = new THREE.Mesh @geometry, mesh
 
+		window.geometry = @geometry
+		window.plane = plane
+
+		plane.rotation.x = 90 * Math.PI / 180
+		plane.rotation.z = 45 * Math.PI / 180
+
 		scene.add plane
+
+		# axis = new THREE.AxisHelper(200);
+		# scene.add axis
 
 
 		app.on 'frame', =>

@@ -18,9 +18,14 @@ class App
 	sketch: (s) =>
 
 		sound = null
+		sound2 = null
 		fft   = null
 		fft_cheap = null
 		canvas = null
+		reverb = null
+		filter = new p5.BandPass();
+
+		counter = 0
 
 		# TODO: fix resize 
 		# $( window ).resize -> 
@@ -31,22 +36,58 @@ class App
 		s.preload = ->
 
 			sound = s.loadSound 'sound/therall_toge.mp3'
+			sound.rate(0.4)
+			# sound.rate(0.5)
+
+			sound2 = s.loadSound 'sound/therall_toge.mp3'
+			sound2.rate(0.5)
+
+			sound.disconnect()
+			sound.connect filter
+
+			# filter.setType 'highpass'
+			filter.freq(500)
 
 		s.setup = ->
+			reverb = new p5.Reverb()
+			delay = new p5.Delay();
 			canvas = s.createCanvas s.windowWidth, s.windowHeight
 
-			sound.loop();
+			# reverb.process( sound, 4, 2 )
+			delay.process( filter )
+			delay.setType 'pingPong'
+			delay.delayTime 0.2
+			delay.feedback 0.4
 
-			fft = new p5.FFT 0.80, 16 * 64
-			fft_cheap = new p5.FFT 0.80, 16
+
+
+			sound.loop();
+			# sound2.loop()
+
+			fft = new p5.FFT 0.9, 16 * 64
+			fft_cheap = new p5.FFT 0.9, 16
 
 		s.draw = =>
+
+			counter++
+
+			app.emit 'frame'
 
 			s.background 0
 			spectrum = fft_cheap.analyze()
 
 			s.noStroke()
-			s.fill 25, 25, 25 # spectrum is green
+			s.fill 50, 50, 50 # spectrum is green
+
+
+
+			if counter % 1 == 0
+
+				i = @threed.geometry.vertices.length - 1
+				while i > 15
+
+					@threed.geometry.vertices[i].z = @threed.geometry.vertices[i-16].z
+					i--
 
 			i = 0
 
@@ -63,14 +104,12 @@ class App
 
 				# console.log "#{i} : #{s.height}"
 
-				@threed.geometry.vertices[i].z = h
+				@threed.geometry.vertices[i].z = h / 20
 
 				i++
 
 			@threed.geometry.verticesNeedUpdate = true;
 			@threed.geometry.normalsNeedUpdate = true;
-
-			app.emit 'frame'
 
 			waveform = fft.waveform()
 
