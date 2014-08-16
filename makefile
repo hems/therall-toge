@@ -2,11 +2,11 @@ setup:
 	git submodule update --init
 	npm install
 
-watch: setup
+watch:
 
 	./node_modules/.bin/polvo -ws
 
-release: setup
+release:
 	./node_modules/.bin/polvo -r
 
 publish:
