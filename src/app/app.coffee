@@ -36,39 +36,13 @@ class App
 		s.preload = =>
 
 			sound = s.loadSound '../sound/november 9th.mp3'
-			sound.rate(0.4)
-			# sound.rate(0.5)
-
-			# sound2 = s.loadSound '../sound/november 9th.mp3'
-			# sound2.rate(0.5)
-
-			sound.disconnect()
-			sound.connect filter
-
-			# filter.setType 'highpass'
-			filter.freq(500)
+			sound.rate(1)
 
 		s.setup = =>
 
-			reverb = new p5.Reverb()
-			delay = new p5.Delay();
 			canvas = s.createCanvas s.windowWidth, s.windowHeight
 
-
-			# threed  = require './threed'
-			# @threed = new threed()
-
-			# puts p5 behind three.js
-			# $( 'body' ).append canvas.canvas
-
-			# reverb.process( sound, 4, 2 )
-			delay.process( filter )
-			delay.setType 'pingPong'
-			delay.delayTime 0.2
-			delay.feedback 0.4
-
 			sound.loop();
-			# sound2.loop()
 
 			fft = new p5.FFT 0.9, 16 * 64
 			fft_cheap = new p5.FFT 0.9, 16
