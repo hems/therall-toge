@@ -33,7 +33,7 @@ class App
 
 		@threed.add_cube '/exp_02'
 
-		# @go '/exp_01'
+		@go '/exp_02'
 
 
 module.exports = app = new App()

@@ -16,7 +16,7 @@ module.exports = class threed
 		renderer.setSize window.innerWidth, window.innerHeight
 
 		renderer.domElement.style.position = 'absolute'
-		$( 'body' ).prepend renderer.domElement
+		# $( 'body' ).prepend renderer.domElement
 
 
 		# camera
