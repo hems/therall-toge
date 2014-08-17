@@ -13,10 +13,10 @@ module.exports = class threed
 		renderer = new THREE.WebGLRenderer antialias: true, alpha: true
 
 		renderer.setClearColor 0x000000, 0
-		renderer.setSize window.innerWidth, window.innerHeight
+		renderer.setSize window.innerWidth, 200
 
 		renderer.domElement.style.position = 'absolute'
-		# $( 'body' ).prepend renderer.domElement
+		$( 'body' ).prepend renderer.domElement
 
 
 		# camera
@@ -35,8 +35,6 @@ module.exports = class threed
 
 
 		app.on 'frame', =>
-
-			console.log 'frame'
 
 			renderer.render @scene, @camera
 
