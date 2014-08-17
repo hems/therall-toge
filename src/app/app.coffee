@@ -2,6 +2,8 @@
 
 happens = require 'happens'
 
+Color = net.brehaut.Color
+
 class App
 
 	constructor: -> 
@@ -36,7 +38,7 @@ class App
 		s.preload = =>
 
 			sound = s.loadSound '../sound/november 9th.mp3'
-			sound.rate(1)
+			# sound.rate(1)
 
 		s.setup = =>
 
@@ -45,7 +47,7 @@ class App
 			sound.loop();
 
 			fft = new p5.FFT 0.9, 16 * 64
-			fft_cheap = new p5.FFT 0.9, 16
+			fft_cheap = new p5.FFT 0.9, 16 * 2
 
 
 		s.draw = =>
@@ -63,9 +65,9 @@ class App
 			if counter % 1 == 0
 
 				i = @threed.geometry.vertices.length - 1
-				while i > 15
+				while i > 31
 
-					@threed.geometry.vertices[i].z = @threed.geometry.vertices[i-16].z
+					@threed.geometry.vertices[i].z = @threed.geometry.vertices[i-32].z
 					i--
 
 			i = 0
@@ -83,9 +85,16 @@ class App
 
 				y = s.map( i, 0, spectrum.length, 0, s.height )
 
-				color = 255 - ( 255 - spectrum[i] )
+				color = Color
+					hue: spectrum[i] / 255 * 360
+					saturation: 0.1
+					value: 0.1
 
-				s.fill color, color, color
+				color = color.setLightness spectrum[i] / 255 * 0.8
+
+				s.fill color.getRed() * 255, color.getGreen() * 255, color.getBlue() * 255
+
+
 
 				s.rect x, y, 1, s.height / spectrum.length
 
