@@ -35,11 +35,11 @@ class App
 
 		s.preload = ->
 
-			sound = s.loadSound 'sound/therall_toge.mp3'
+			sound = s.loadSound '../sound/therall_toge.mp3'
 			sound.rate(0.4)
 			# sound.rate(0.5)
 
-			sound2 = s.loadSound 'sound/therall_toge.mp3'
+			sound2 = s.loadSound '../sound/therall_toge.mp3'
 			sound2.rate(0.5)
 
 			sound.disconnect()
