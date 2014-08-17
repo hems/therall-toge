@@ -47,7 +47,7 @@ module.exports = class threed
 
 		# plane
 
-		@geometry = new THREE.PlaneGeometry( 150, 150, 15, 150 )
+		@geometry = new THREE.PlaneGeometry( 150, 150, 15, 160 )
 		mesh     = new THREE.MeshBasicMaterial
 
 		mesh.wireframe = true

@@ -8,12 +8,7 @@ class App
 
 		happens @
 
-		$ =>
-
-			threed = require './threed'
-			@threed = new threed()
-
-			new p5 @sketch
+		$ => new p5 @sketch
 
 	sketch: (s) =>
 
@@ -33,13 +28,13 @@ class App
 		# 	canvas.width  = s.windowWidth
 		# 	canvas.height = s.windowHeight
 
-		s.preload = ->
+		s.preload = =>
 
-			sound = s.loadSound 'sound/therall_toge.mp3'
+			sound = s.loadSound '../sound/therall_toge.mp3'
 			sound.rate(0.4)
 			# sound.rate(0.5)
 
-			sound2 = s.loadSound 'sound/therall_toge.mp3'
+			sound2 = s.loadSound '../sound/therall_toge.mp3'
 			sound2.rate(0.5)
 
 			sound.disconnect()
@@ -48,10 +43,18 @@ class App
 			# filter.setType 'highpass'
 			filter.freq(500)
 
-		s.setup = ->
+		s.setup = =>
+
 			reverb = new p5.Reverb()
 			delay = new p5.Delay();
 			canvas = s.createCanvas s.windowWidth, s.windowHeight
+
+
+			threed  = require './threed'
+			@threed = new threed()
+
+			# puts p5 behind three.js
+			$( 'body' ).append canvas.canvas
 
 			# reverb.process( sound, 4, 2 )
 			delay.process( filter )
@@ -59,21 +62,18 @@ class App
 			delay.delayTime 0.2
 			delay.feedback 0.4
 
-
-
 			sound.loop();
 			# sound2.loop()
 
 			fft = new p5.FFT 0.9, 16 * 64
 			fft_cheap = new p5.FFT 0.9, 16
 
-		s.draw = =>
 
-			counter++
+		s.draw = =>
 
 			app.emit 'frame'
 
-			s.background 0
+			# s.background 0
 			spectrum = fft_cheap.analyze()
 
 			s.noStroke()
@@ -94,16 +94,25 @@ class App
 
 			row = @threed.geometry.vertices
 			while i < spectrum.length
-				x = s.map( i, 0, spectrum.length, 0, s.width )
 
+				# regular square bands
+				# x = s.map( i, 0, spectrum.length, 0, s.width )
 				h = -s.height + s.map(spectrum[i], 0, 255, s.height, 0) * 1
+				# s.rect x, s.height, s.width / spectrum.length, h
 
-				s.rect x, s.height, s.width / spectrum.length, h
+				x = counter
 
-				# @threed.geometry.vertices[i].z = spectrum[i]
+				y = s.map( i, 0, spectrum.length, 0, s.height )
 
-				# console.log "#{i} : #{s.height}"
+				color = 255 - ( 255 - spectrum[i] )
 
+				s.fill color, color, color
+
+				s.rect x, y, 1, s.height / spectrum.length
+
+				
+
+				# h = -s.height + s.map(spectrum[i], 0, 255, s.height, 0) * 1
 				@threed.geometry.vertices[i].z = h / 20
 
 				i++
@@ -111,20 +120,24 @@ class App
 			@threed.geometry.verticesNeedUpdate = true;
 			@threed.geometry.normalsNeedUpdate = true;
 
-			waveform = fft.waveform()
+			# waveform = fft.waveform()
 
-			s.beginShape()
-			s.stroke 100, 100, 100 # waveform is red
-			s.strokeWeight 1
-			i = 0
+			# s.beginShape()
+			# s.stroke 100, 100, 100 # waveform is red
+			# s.strokeWeight 1
+			# i = 0
 
-			while i < waveform.length
-			  x = s.map(i, 0, waveform.length, 0, s.width)
-			  y = s.map(waveform[i], 0, 255, 0, s.height)
-			  s.vertex x, y
-			  i++
+			# while i < waveform.length
+			#   x = s.map(i, 0, waveform.length, 0, s.width)
+			#   y = s.map(waveform[i], 0, 255, 0, s.height)
+			#   s.vertex x, y
+			#   i++
 
-			s.endShape()
+			# s.endShape()
+
+			if counter == s.width then counter = 0
+
+			counter++
 
 
 
