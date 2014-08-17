@@ -8,7 +8,12 @@ class App
 
 		happens @
 
-		$ => new p5 @sketch
+		$ =>
+
+			threed = require './threed'
+			@threed = new threed()
+
+			new p5 @sketch
 
 	sketch: (s) =>
 
@@ -50,11 +55,11 @@ class App
 			canvas = s.createCanvas s.windowWidth, s.windowHeight
 
 
-			threed  = require './threed'
-			@threed = new threed()
+			# threed  = require './threed'
+			# @threed = new threed()
 
 			# puts p5 behind three.js
-			$( 'body' ).append canvas.canvas
+			# $( 'body' ).append canvas.canvas
 
 			# reverb.process( sound, 4, 2 )
 			delay.process( filter )
