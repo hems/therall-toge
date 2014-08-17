@@ -6,8 +6,8 @@ input:
   - src
 
 output:
-  js: ./public/exp_02/app.js
-  css: ./public/exp_02/app.css
+  js: ./public/exp_05/app.js
+  css: ./public/exp_05/app.css
 
 alias:
   app: ./src/app

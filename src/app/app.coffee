@@ -125,20 +125,20 @@ class App
 			@threed.geometry.verticesNeedUpdate = true;
 			@threed.geometry.normalsNeedUpdate = true;
 
-			# waveform = fft.waveform()
+			waveform = fft.waveform()
 
-			# s.beginShape()
-			# s.stroke 100, 100, 100 # waveform is red
-			# s.strokeWeight 1
-			# i = 0
+			s.beginShape()
+			s.stroke 100, 100, 100 # waveform is red
+			s.strokeWeight 1
+			i = 0
 
-			# while i < waveform.length
-			#   x = s.map(i, 0, waveform.length, 0, s.width)
-			#   y = s.map(waveform[i], 0, 255, 0, s.height)
-			#   s.vertex x, y
-			#   i++
+			while i < waveform.length
+			  x = s.map(i, 0, waveform.length, 0, s.width)
+			  y = s.map(waveform[i], 0, 255, 0, s.height)
+			  s.vertex x, y
+			  i++
 
-			# s.endShape()
+			s.endShape()
 
 			if counter == s.width then counter = 0
 
