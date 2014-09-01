@@ -37,8 +37,10 @@ class App
 
 		s.preload = =>
 
-			sound = s.loadSound '../sound/november 9th.mp3'
-			# sound.rate(1)
+			# api.sound = sound = s.loadSound "http://hems.io/therall-toge/streamer.php?track_id=9244198"
+			sound = sound = s.loadSound "http://hems.io/therall-toge/streamer.php?track_id=1412201"
+
+			sound.rate(0.5)
 
 		s.setup = =>
 
@@ -47,6 +49,7 @@ class App
 			sound.loop();
 
 			fft = new p5.FFT 0.9, 16 * 64
+
 			fft_cheap = new p5.FFT 0.9, 16 * 2
 
 
