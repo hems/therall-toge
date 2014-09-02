@@ -4,18 +4,68 @@ happens = require 'happens'
 
 Color = net.brehaut.Color
 
+###
+# Stolen Query String parser + current query string parsed
+###
+class QueryString
+	
+	constructor: (@queryString) ->
+		@queryString or= window.document.location.search?.substr 1
+		@variables = @queryString.split '&'
+		@pairs = ([key, value] = pair.split '=' for pair in @variables)
+	
+	get: (name) ->
+		for [key, value] in @pairs
+			return value if key is name
+
+query = new QueryString
+
+
+###
+# Create global track_id in order to retrieve audio later,
+# a default value is associated
+###
+
+track_id = 1412201
+
+
 class App
 
 	constructor: -> 
 
 		happens @
 
+
 		$ =>
 
-			threed = require './threed'
-			@threed = new threed()
+			unless query.get( 'url' )
+				@start()
 
-			new p5 @sketch
+				return
+
+
+			url = query.get 'url'
+
+			console.warn "url ->" + query.get ('url')
+
+			url = "http://hems.io/therall-toge/resolve.php?track_url=#{url}"
+
+			$.getJSON url, ( track ) =>
+
+
+				track_id = track.id
+
+				@start()
+
+
+
+
+
+	start: =>
+		threed = require './threed'
+		@threed = new threed()
+
+		new p5 @sketch
 
 	sketch: (s) =>
 
@@ -38,7 +88,7 @@ class App
 		s.preload = =>
 
 			# api.sound = sound = s.loadSound "http://hems.io/therall-toge/streamer.php?track_id=9244198"
-			sound = sound = s.loadSound "http://hems.io/therall-toge/streamer.php?track_id=1412201"
+			sound = sound = s.loadSound "//hems.io/therall-toge/streamer.php?track_id=#{track_id}"
 
 			sound.rate(0.5)
 
@@ -74,7 +124,6 @@ class App
 					i--
 
 			i = 0
-
 
 			row = @threed.geometry.vertices
 			while i < spectrum.length
