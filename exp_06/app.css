@@ -1,56 +1,8 @@
-
-/* line 1 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/stylus/lib/functions/index.styl */
-
-/* line 14 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/index.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/border.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/clearfix.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/color-image.styl */
-
-/* line 6 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/flex.styl */
-
-/* line 92 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/gradients.styl */
-
-/* line 92 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/config.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/iconic.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/image.styl */
-
-/* line 27 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/overflow.styl */
-
-/* line 3 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/positions.styl */
-
-/* line 3 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/reset.styl */
-
-/* line 6 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/text/index.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/text/aliases.styl */
-
-/* line 2 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/text/ellipsis.styl */
-
-/* line 11 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/text/hide-text.styl */
-
-/* line 9 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/text/replace-text.styl */
-
-/* line 1 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/text/shadow-stroke.styl */
-
-/* line undefined : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/vendor.styl */
-
-/* line 574 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/config.styl */
-
-/* line 12 : /Users/hems/git/p5/sound/node_modules/polvo/node_modules/polvo-stylus/node_modules/nib/lib/nib/size.styl */
-
-/* line 1 : /Users/hems/git/p5/sound/src/stylus/app.styl */
 * {
   margin: 0;
   padding: 0;
   border: 0;
 }
-
-/* line 6 : /Users/hems/git/p5/sound/src/stylus/app.styl */
 body {
   background-color: #121212;
 }
